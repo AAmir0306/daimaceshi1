@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <h1>我的待办清单</h1>
+        <p>支持新增、编辑、完成、删除、筛选、搜索与本地持久化</p>
+      </header>
+
+      <section class="panel">
+        <form id="todo-form" class="todo-form" autocomplete="off">
+          <input
+            id="todo-input"
+            name="todo"
+            type="text"
+            placeholder="请输入待办事项..."
+            maxlength="120"
+            required
+          />
+          <input id="todo-date" name="dueDate" type="date" />
+          <button type="submit">添加</button>
+        </form>
+
+        <div class="toolbar">
+          <div class="toolbar__group">
+            <button data-filter="all" class="is-active">全部</button>
+            <button data-filter="active">进行中</button>
+            <button data-filter="completed">已完成</button>
+          </div>
+          <div class="toolbar__group">
+            <input id="search-input" type="search" placeholder="搜索事项" />
+            <button id="clear-completed" type="button">清空已完成</button>
+          </div>
+        </div>
+
+        <ul id="todo-list" class="todo-list" aria-live="polite"></ul>
+
+        <footer class="status-bar">
+          <span id="task-count">0 个任务</span>
+          <button id="toggle-all" type="button">全部设为完成/未完成</button>
+        </footer>
+      </section>
+    </main>
+
+    <template id="todo-item-template">
+      <li class="todo-item">
+        <label class="todo-item__check">
+          <input class="todo-item__toggle" type="checkbox" />
+          <span class="custom-check"></span>
+        </label>
+
+        <div class="todo-item__content">
+          <p class="todo-item__title"></p>
+          <small class="todo-item__meta"></small>
+        </div>
+
+        <div class="todo-item__actions">
+          <button class="edit-btn" type="button">编辑</button>
+          <button class="delete-btn" type="button">删除</button>
+        </div>
+      </li>
+    </template>
+
+    <dialog id="edit-dialog">
+      <form id="edit-form" method="dialog" class="edit-form">
+        <h2>编辑任务</h2>
+        <input id="edit-input" type="text" maxlength="120" required />
+        <input id="edit-date" type="date" />
+        <menu>
+          <button value="cancel" type="submit">取消</button>
+          <button id="save-edit" value="default" type="submit">保存</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
