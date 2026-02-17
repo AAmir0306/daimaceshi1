@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List - 功能完整版</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <h1>📝 To Do List</h1>
+        <p>支持新增、编辑、删除、筛选、搜索、优先级、截止日期和本地持久化</p>
+      </header>
+
+      <section class="panel">
+        <form id="todo-form" class="todo-form">
+          <input id="todo-input" type="text" maxlength="120" placeholder="输入待办事项..." required />
+          <select id="todo-priority" aria-label="优先级">
+            <option value="low">低优先级</option>
+            <option value="medium" selected>中优先级</option>
+            <option value="high">高优先级</option>
+          </select>
+          <input id="todo-deadline" type="date" aria-label="截止日期" />
+          <button type="submit">添加</button>
+        </form>
+
+        <div class="toolbar">
+          <input id="search-input" type="search" placeholder="搜索待办内容..." />
+          <select id="filter-select" aria-label="筛选">
+            <option value="all">全部</option>
+            <option value="active">未完成</option>
+            <option value="completed">已完成</option>
+            <option value="overdue">已过期</option>
+          </select>
+          <select id="sort-select" aria-label="排序">
+            <option value="created-desc">最新创建</option>
+            <option value="created-asc">最早创建</option>
+            <option value="priority-desc">优先级从高到低</option>
+            <option value="deadline-asc">截止日期最近</option>
+          </select>
+        </div>
+
+        <div class="batch-actions">
+          <button id="toggle-all-btn" type="button">全部切换完成状态</button>
+          <button id="clear-completed-btn" type="button" class="danger">清除已完成</button>
+        </div>
+
+        <ul id="todo-list" class="todo-list" aria-live="polite"></ul>
+
+        <footer class="stats" id="stats"></footer>
+      </section>
+    </main>
+
+    <template id="todo-item-template">
+      <li class="todo-item">
+        <label class="check-wrap">
+          <input type="checkbox" class="todo-checkbox" />
+          <span class="check-mark"></span>
+        </label>
+        <div class="todo-content">
+          <p class="todo-title"></p>
+          <p class="todo-meta"></p>
+        </div>
+        <div class="todo-actions">
+          <button type="button" class="edit-btn">编辑</button>
+          <button type="button" class="delete-btn danger">删除</button>
+        </div>
+      </li>
+    </template>
+
+    <dialog id="edit-dialog">
+      <form id="edit-form" method="dialog" class="edit-form">
+        <h2>编辑待办</h2>
+        <input id="edit-input" type="text" maxlength="120" required />
+        <select id="edit-priority" aria-label="编辑优先级">
+          <option value="low">低优先级</option>
+          <option value="medium">中优先级</option>
+          <option value="high">高优先级</option>
+        </select>
+        <input id="edit-deadline" type="date" aria-label="编辑截止日期" />
+        <menu>
+          <button value="cancel" type="button" id="cancel-edit-btn">取消</button>
+          <button value="default" type="submit">保存</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
